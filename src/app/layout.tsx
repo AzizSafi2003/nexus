@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Codex",
+  title: "Codex | performance-driven IDE",
   description: "Built by developers. For developers.",
 };
 
