@@ -7,9 +7,9 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { RotateCcwIcon, ShareIcon, TypeIcon } from "lucide-react";
 import { useClerk } from "@clerk/nextjs";
-import useMounted from "@/hooks/useMounted";
-
 import { EditorPanelSkeleton } from "./EditorPanelSkeleton";
+import useMounted from "@/hooks/useMounted";
+import ShareSnippetDialog from "./ShareSnippetDialog";
 
 function EditorPanel() {
   const clerk = useClerk();
@@ -94,7 +94,7 @@ function EditorPanel() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleRefresh}
-              className="p-2 bg-[#1e1e2e] hover:bg-[#2a2a3a] rounded-lg ring-1 ring-white/5 transition-colors"
+              className="p-2 bg-[#1e1e2e] hover:bg-[#2a2a3a] rounded-lg ring-1 ring-white/5 transition-colors cursor-pointer"
               aria-label="Reset to default code"
             >
               <RotateCcwIcon className="size-4 text-gray-400" />
@@ -106,7 +106,7 @@ function EditorPanel() {
               whileTap={{ scale: 0.98 }}
               onClick={() => setIsShareDialogOpen(true)}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg overflow-hidden bg-linear-to-r
-               from-blue-500 to-blue-600 opacity-90 hover:opacity-100 transition-opacity"
+               from-blue-500 to-blue-600 opacity-90 hover:opacity-100 transition-opacity cursor-pointer"
             >
               <ShareIcon className="size-4 text-white" />
               <span className="text-sm font-medium text-white ">Share</span>
@@ -151,9 +151,9 @@ function EditorPanel() {
           {!clerk.loaded && <EditorPanelSkeleton />}
         </div>
       </div>
-      {/* {isShareDialogOpen && (
+      {isShareDialogOpen && (
         <ShareSnippetDialog onClose={() => setIsShareDialogOpen(false)} />
-      )} */}
+      )}
     </div>
   );
 }
