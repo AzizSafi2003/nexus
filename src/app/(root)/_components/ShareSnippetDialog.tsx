@@ -32,7 +32,7 @@ function ShareSnippetDialog({ onClose }: { onClose: () => void }) {
         },
       });
     } catch (error) {
-      console.log("Error Creating Snippet:", error);
+      console.error("Error Creating Snippet:", error);
       toast.error("Error Creating Snippet", {
         icon: "❌",
         style: {
