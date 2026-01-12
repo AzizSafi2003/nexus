@@ -38,7 +38,7 @@ function RunButton() {
       className={`
         group relative inline-flex items-center gap-2.5 px-5 py-2.5
         disabled:cursor-not-allowed
-        focus:outline-none
+        focus:outline-none cursor-pointer
       `}
     >
       {/* bg with gradient */}
