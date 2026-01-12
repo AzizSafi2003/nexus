@@ -102,7 +102,7 @@ function SnippetCard({ snippet }: { snippet: Snippet }) {
                   <div
                     className="absolute inset-0 bg-linear-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-20 
                   group-hover:opacity-30 transition-all duration-500"
-                    area-hidden="true"
+                    aria-hidden="true"
                   />
                   <div
                     className="relative p-2 rounded-lg bg-linear-to-br from-blue-500/10 to-purple-500/10 group-hover:from-blue-500/20
