@@ -1,6 +1,5 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import toast from "react-hot-toast";
 
 export const createSnippet = mutation({
   args: {
@@ -221,4 +220,3 @@ export const getStarredSnippets = query({
     return snippets.filter((snippet) => snippet !== null);
   },
 });
-
