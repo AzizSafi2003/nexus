@@ -67,8 +67,25 @@ export default function HeaderClient({ userId }: { userId?: string }) {
         </div>
 
         {/* RIGHT SECTION */}
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col lg:flex-row items-center gap-6">
+          <nav className="flex lg:hidden items-center space-x-1">
+            <Link
+              href="/snippets"
+              className="relative group flex items-center gap-2 px-4 py-1.5 rounded-lg 
+              text-gray-300 bg-gray-800/50 hover:bg-blue-500/10 border border-gray-800 
+              hover:border-blue-500/50 transition-all duration-300 shadow-lg overflow-hidden"
+            >
+              <div
+                className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 
+                opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+              <Code2 className="w-4 h-4 relative z-10 group-hover:rotate-3 transition-transform" />
+              <span className="text-sm font-medium relative z-10 group-hover:text-white transition-colors">
+                Snippets
+              </span>
+            </Link>
+          </nav>
+          <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-3">
             <ThemeSelector />
             <LanguageSelector hasAccess={Boolean(convexUser?.isPro)} />
           </div>
@@ -94,8 +111,9 @@ export default function HeaderClient({ userId }: { userId?: string }) {
             <RunButton />
           </SignedIn>
 
-          <div className="flex pl-3 border-l border-gray-600">
+          <div className="flex pl-3 items-center border-none lg:border-l border-gray-600">
             <HeaderProfileBtn />
+            <p className="ml-3 lg:hidden">Profile</p>
           </div>
         </div>
       </div>

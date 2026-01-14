@@ -34,9 +34,14 @@ http.route({
           amount: data.attributes.total,
         });
 
-        if (success) {
-          console.log("Upgrade to Pro successfully!");
+        if (!success) {
+          console.error(
+            "Failed to upgrade to Pro: ",
+            data.attributes.user_email
+          );
+          return new Response("Failed to upgrade user", { status: 500 });
         }
+        console.log("Upgrade to Pro successfully!");
       }
 
       return new Response("Webhook processed successfully", { status: 200 });
