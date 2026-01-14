@@ -2,7 +2,7 @@
 import { useUser } from "@clerk/nextjs";
 import { usePaginatedQuery, useQuery } from "convex/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { api } from "../../../convex/_generated/api";
 import NavigationHeader from "@/components/NavigationHeader";
 import ProfileHeader from "./_components/ProfileHeader";
@@ -20,6 +20,7 @@ import Image from "next/image";
 import Link from "next/link";
 import StarButton from "@/components/StarButton";
 import CodeBlock from "./_components/CodeBlock";
+import toast from "react-hot-toast";
 
 const TABS = [
   {
@@ -66,7 +67,26 @@ function ProfilePage() {
     if (executionStatus === "CanLoadMore") loadMore(5);
   };
 
-  if (!user && isLoaded) return router.push("/");
+  const hasRedirected = useRef(false);
+
+  useEffect(() => {
+    if (isLoaded && !user && !hasRedirected.current) {
+      hasRedirected.current = true;
+      toast.error("Must Be Authenticated First!", {
+        icon: "❌",
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      router.push("/");
+    }
+  }, [isLoaded, user, router]);
+
+  // HARD BLOCK RENDERING
+  if (!isLoaded) return null;
+  if (isLoaded && !user) return null;
 
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
@@ -92,7 +112,7 @@ function ProfilePage() {
         >
           {/* Tabs */}
           <div className="border-b border-gray-800/50">
-            <div className="flex space-x-1 p-4">
+            <div className="lg:flex space-x-1 p-4">
               {TABS.map((tab) => (
                 <button
                   key={tab.id}
@@ -190,7 +210,7 @@ function ProfilePage() {
                         />
 
                         {(execution.output || execution.error) && (
-                          <div className="mt-4 p-4 rounded-lg bg-black/40">
+                          <div className="mt-4 p-4 rounded-lg bg-black/40 overflow-x-auto">
                             <h4 className="text-sm font-medium text-gray-400 mb-2">
                               Output
                             </h4>

@@ -5,11 +5,18 @@ import { defineMonacoThemes, LANGUAGE_CONFIG } from "../_constants";
 import { Editor } from "@monaco-editor/react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { RotateCcwIcon, ShareIcon, TypeIcon } from "lucide-react";
+import {
+  DownloadIcon,
+  Play,
+  RotateCcwIcon,
+  ShareIcon,
+  TypeIcon,
+} from "lucide-react";
 import { useClerk } from "@clerk/nextjs";
 import { EditorPanelSkeleton } from "./EditorPanelSkeleton";
 import useMounted from "@/hooks/useMounted";
 import ShareSnippetDialog from "./ShareSnippetDialog";
+import RunButtonSmallScreen from "./RunButtonSmallScreen";
 
 function EditorPanel() {
   const clerk = useClerk();
@@ -36,6 +43,31 @@ function EditorPanel() {
     localStorage.removeItem(`editor-code-${language}`);
   };
 
+  const handleDownload = () => {
+    if (!editor) return;
+
+    const code = editor.getValue();
+    const extension = LANGUAGE_CONFIG[language].extension;
+
+    const userFileName = window.prompt("Enter file name:", "main");
+
+    // If user cancels or enters empty name
+    if (!userFileName) return;
+
+    const filename = `${userFileName}.${extension}`;
+
+    const blob = new Blob([code], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.click();
+
+    // clean up memory:
+    URL.revokeObjectURL(url);
+  };
+
   const handleEditorChange = (value: string | undefined) => {
     if (value) localStorage.setItem(`editor-code-${language}`, value);
   };
@@ -53,7 +85,7 @@ function EditorPanel() {
       <div className="relative bg-[#12121a]/90 backdrop-blur rounded-xl border border-white/5 p-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-3">
             <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#1e1e2e] ring-1 ring-white/5">
               <Image
                 src={"/" + language + ".png"}
@@ -69,7 +101,7 @@ function EditorPanel() {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col lg:flex-row items-center gap-3">
             {/* Font Size Slider */}
             <div className="flex items-center gap-3 px-3 py-2 bg-[#1e1e2e] rounded-lg ring-1 ring-white/5">
               <TypeIcon className="size-4 text-gray-400" />
@@ -89,16 +121,29 @@ function EditorPanel() {
                 </span>
               </div>
             </div>
+            <div className="flex gap-4 my-2 lg:my-0">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleRefresh}
+                className="p-2 bg-[#1e1e2e] hover:bg-[#2a2a3a] rounded-lg ring-1 ring-white/5 transition-colors cursor-pointer"
+                aria-label="Reset to default code"
+              >
+                <RotateCcwIcon className="size-4 text-gray-400" />
+              </motion.button>
 
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleRefresh}
-              className="p-2 bg-[#1e1e2e] hover:bg-[#2a2a3a] rounded-lg ring-1 ring-white/5 transition-colors cursor-pointer"
-              aria-label="Reset to default code"
-            >
-              <RotateCcwIcon className="size-4 text-gray-400" />
-            </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleDownload}
+                className="p-2 bg-[#1e1e2e] hover:bg-[#2a2a3a] rounded-lg ring-1 ring-white/5 transition-colors cursor-pointer"
+                aria-label="Reset to default code"
+              >
+                <DownloadIcon className="size-4 text-gray-400" />
+              </motion.button>
+
+              <RunButtonSmallScreen />
+            </div>
 
             {/* Share Button */}
             <motion.button

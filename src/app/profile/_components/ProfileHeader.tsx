@@ -89,7 +89,7 @@ function ProfileHeader({ userStats, userData, user }: ProfileHeaderProps) {
      border-gray-800/50 overflow-hidden"
     >
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-position-[32px]" />
-      <div className="relative flex items-center gap-8">
+      <div className="relative flex flex-col lg:flex-row items-center gap-8">
         <div className="relative group">
           <div
             className="absolute inset-0 bg-linear-to-r from-blue-500 to-purple-600 rounded-full 
@@ -113,7 +113,7 @@ function ProfileHeader({ userStats, userData, user }: ProfileHeaderProps) {
           <div className="flex items-center gap-3 mb-2">
             <h1 className="text-3xl font-bold text-white">{userData.name}</h1>
             {userData.isPro && (
-              <span className="px-3 py-1 bg-purple-500/10 text-purple-400 rounded-full text-sm font-medium">
+              <span className="px-3 py-1 bg-purple-500/10 text-purple-400 rounded-full text-sm font-medium text-center">
                 Pro Member
               </span>
             )}

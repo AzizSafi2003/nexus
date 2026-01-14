@@ -1,6 +1,8 @@
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import CopyButton from "./CopyButton";
+import Image from "next/image";
+import { useState } from "react";
 
 const CodeBlock = ({ language, code }: { language: string; code: string }) => {
   const trimmedCode = code
@@ -8,16 +10,23 @@ const CodeBlock = ({ language, code }: { language: string; code: string }) => {
     .map((line) => line.trimEnd()) /* remove trailing spaces from each line */
     .join("\n"); /* join back into a single string */
 
+  // fallback image logic (minimal & safe)
+  const normalizedLanguage = language?.toLowerCase() || "plaintext";
+  const [imgSrc, setImgSrc] = useState(`/${normalizedLanguage}.png`);
+
   return (
     <div className="my-4 bg-[#0a0a0f] rounded-lg overflow-hidden border border-[#ffffff0a]">
       {/* header bar showing language and copy button */}
       <div className="flex items-center justify-between px-4 py-2 bg-[#ffffff08]">
         {/* language indicator with icon */}
         <div className="flex items-center gap-2">
-          <img
-            src={`/${language}.png`}
+          <Image
+            src={imgSrc}
             alt={language}
+            height={16}
+            width={16}
             className="size-4 object-contain"
+            onError={() => setImgSrc("/unknown.png")}
           />
           <span className="text-sm text-gray-400">
             {language || "plaintext"}

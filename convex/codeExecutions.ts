@@ -1,6 +1,7 @@
 import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { paginationOptsValidator } from "convex/server";
+import { auth } from "@clerk/nextjs/server";
 
 export const saveExecution = mutation({
   args: {
@@ -40,6 +41,17 @@ export const getUserExecutions = query({
     paginationOpts: paginationOptsValidator,
   },
   handler: async (ctx, args) => {
+    const currentUser = auth();
+
+    // Type-safe check
+    if (
+      !currentUser ||
+      !("id" in currentUser) ||
+      currentUser.id !== args.userId
+    ) {
+      throw new Error("Unauthorized");
+    }
+
     return await ctx.db
       .query("codeExecutions")
       .withIndex("by_user_id")
@@ -117,4 +129,3 @@ export const getUserStats = query({
     };
   },
 });
-
