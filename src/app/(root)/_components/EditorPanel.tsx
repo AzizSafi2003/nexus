@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import {
   DownloadIcon,
-  Play,
   RotateCcwIcon,
   ShareIcon,
   TypeIcon,
