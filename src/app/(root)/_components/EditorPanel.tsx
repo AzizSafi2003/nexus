@@ -137,7 +137,7 @@ function EditorPanel() {
                 whileTap={{ scale: 0.95 }}
                 onClick={handleDownload}
                 className="p-2 bg-[#1e1e2e] hover:bg-[#2a2a3a] rounded-lg ring-1 ring-white/5 transition-colors cursor-pointer"
-                aria-label="Reset to default code"
+                aria-label="Download codes"
               >
                 <DownloadIcon className="size-4 text-gray-400" />
               </motion.button>

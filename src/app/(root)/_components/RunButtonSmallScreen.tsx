@@ -38,6 +38,7 @@ function RunButtonSmallScreen() {
       className={`
         p-2 bg-[#1e1e2e] hover:bg-[#2a2a3a] rounded-lg ring-1 ring-white/5 transition-colors cursor-pointer lg:hidden
       `}
+      aria-label="Run codes"
     >
       {!isRunning ? (
         <Play className="size-4 text-gray-400" />
