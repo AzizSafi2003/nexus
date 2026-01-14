@@ -20,7 +20,6 @@ import Image from "next/image";
 import Link from "next/link";
 import StarButton from "@/components/StarButton";
 import CodeBlock from "./_components/CodeBlock";
-import toast from "react-hot-toast";
 
 const TABS = [
   {
