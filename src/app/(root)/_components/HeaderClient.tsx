@@ -113,7 +113,7 @@ export default function HeaderClient({ userId }: { userId?: string }) {
 
           <div className="flex pl-3 items-center border-none lg:border-l border-gray-600">
             <HeaderProfileBtn />
-            <p className="ml-3 lg:hidden">Profile</p>
+            {convexUser && <p className="ml-3 lg:hidden">Profile</p>}
           </div>
         </div>
       </div>
