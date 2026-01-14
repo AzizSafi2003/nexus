@@ -11,7 +11,6 @@ http.route({
   method: "POST",
   handler: httpAction(async (ctx, request) => {
     const payloadString = await request.text();
-    /* We ensure that the request is coming from Lemon Squeezy handling the malicious user request! */
     const signature = request.headers.get("X-Signature");
 
     if (!signature) {
@@ -34,19 +33,14 @@ http.route({
           amount: data.attributes.total,
         });
 
-        if (!success) {
-          console.error(
-            "Failed to upgrade to Pro: ",
-            data.attributes.user_email
-          );
-          return new Response("Failed to upgrade user", { status: 500 });
+        if (success) {
+          // optionally do anything here
         }
-        console.log("Upgrade to Pro successfully!");
       }
 
       return new Response("Webhook processed successfully", { status: 200 });
     } catch (error) {
-      console.error("Webhook error:", error);
+      console.log("Webhook error:", error);
       return new Response("Error processing webhook", { status: 500 });
     }
   }),
@@ -103,7 +97,7 @@ http.route({
           name,
         });
       } catch (error) {
-        console.log("Error creating user: ", error);
+        console.log("Error creating user:", error);
         return new Response("Error creating user", { status: 500 });
       }
     }

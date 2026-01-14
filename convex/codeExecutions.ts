@@ -6,14 +6,13 @@ export const saveExecution = mutation({
   args: {
     language: v.string(),
     code: v.string(),
-    /* we can have one of them output or error, or both in the same time */
+    // we could have either one of them, or both at the same time
     output: v.optional(v.string()),
     error: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    // checking if the user is authenticated:
     const identity = await ctx.auth.getUserIdentity();
-    if (!identity) throw new ConvexError("Not Authenticated");
+    if (!identity) throw new ConvexError("Not authenticated");
 
     // check pro status
     const user = await ctx.db
@@ -26,7 +25,6 @@ export const saveExecution = mutation({
       throw new ConvexError("Pro subscription required to use this language");
     }
 
-    /* we will take all the arguments and add the userId that this user added this code */
     await ctx.db.insert("codeExecutions", {
       ...args,
       userId: identity.subject,
@@ -65,7 +63,7 @@ export const getUserStats = query({
       .filter((q) => q.eq(q.field("userId"), args.userId))
       .collect();
 
-    /* Get all starred snippet details to analyze languages */
+    // Get all starred snippet details to analyze languages
     const snippetIds = starredSnippets.map((star) => star.snippetId);
     const snippetDetails = await Promise.all(
       snippetIds.map((id) => ctx.db.get(id))
