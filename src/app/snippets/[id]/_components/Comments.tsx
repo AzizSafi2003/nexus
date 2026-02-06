@@ -12,7 +12,7 @@ function Comments({ snippetId }: { snippetId: Id<"snippets"> }) {
   const { user } = useUser();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [deletingCommentId, setDeletingCommentId] = useState<string | null>(
-    null
+    null,
   );
 
   const comments =
@@ -81,7 +81,7 @@ function Comments({ snippetId }: { snippetId: Id<"snippets"> }) {
           background: "#333",
           color: "#fff",
         },
-      }
+      },
     );
   };
 
@@ -134,7 +134,7 @@ function Comments({ snippetId }: { snippetId: Id<"snippets"> }) {
               Sign in to join the discussion
             </p>
             <SignInButton mode="modal">
-              <button className="px-6 py-2 bg-[#3b82f6] text-white rounded-lg hover:bg-[#2563eb] transition-colors">
+              <button className="px-6 py-2 bg-[#3b82f6] text-white rounded-lg hover:bg-[#2563eb] transition-colors cursor-pointer">
                 Sign In
               </button>
             </SignInButton>

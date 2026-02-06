@@ -1,3 +1,5 @@
 {
-  "cSpell.words": ["DEFINITONS", "deletin", "monokai", "Squeezy", "svix"]
+  "cSpell.words": ["DEFINITONS", "deletin", "monokai", "Squeezy", "svix"],
+  "files.autoSave": "afterDelay",
+  "editor.formatOnSave": true
 }

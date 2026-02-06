@@ -37,6 +37,7 @@ function LanguageSelector({ hasAccess }: { hasAccess: boolean }) {
     setIsOpen(false);
   };
 
+  // Solve Hydration error:
   if (!mounted) return null;
 
   return (
