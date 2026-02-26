@@ -1,12 +1,24 @@
 # Codex
 
-<p align="center">
-  <img src="./public/project-preview-1.png" alt="Codex Preview 1" width="900"/>
-</p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="./public/project-preview-1.png" alt="Project Preview 1" width="400"/>
+    </td>
+    <td align="center">
+      <img src="./public/project-preview-2.png" alt="Project Preview 2" width="400"/>
+    </td>
+  </tr>
 
-<p align="center">
-  <img src="./public/project-preview-2.png" alt="Codex Preview 2" width="900"/>
-</p>
+  <tr>
+    <td align="center">
+      <img src="./public/project-preview-3.png" alt="Project Preview 1" width="400"/>
+    </td>
+    <td align="center">
+      <img src="./public/project-preview-4.png" alt="Project Preview 2" width="400"/>
+    </td>
+  </tr>
+</table>
 
 <p align="center">
   <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
@@ -25,7 +37,8 @@
 
 Explore the project live here:  
 🔗 https://codex-gold-tau.vercel.app/
-This link used to work as it is working now I am telling this because now when we run the piston on localhost:2000 therefor the vercel won't recognize we have the way to Deploy Piston to cloud (Run Piston on Railway/Render/Hetzner VPS) which is ($5-20/month) unfortunately due to no ecomic support I can't do that for now but you can check the screen recording of running codes on various programming language at the bottom of this file 👇🏻
+This link used to work as it is working now I am telling this because now when we run the piston on localhost:2000 therefor the vercel won't recognize we have the way to Deploy Piston to cloud (Run Piston on Railway/Render/Hetzner VPS) which is ($5-20/month) unfortunately due to no ecomic support I can't do that for now.
+
 ---
 
 ## Description
@@ -67,6 +80,4 @@ npm install
 --- Open three terminal ---
 first terminal run: `npx convex dev` (for convex)
 second terminal run: `npm run dev` (for Next.js)
-third terminal run: `sudo docker ps` (I don't know if it is working on windows you should see something like 0.0.0.0:2000->2000/tcp, [::]:2000->2000/tcp inspiring_meitner)
-
-<p align="center"> <video src="./public/video.MP4" controls width="900"></video> </p>
+third terminal run: `sudo docker ps` (I don't know if it is working on windows you should see something like: 0.0.0.0:2000->2000/tcp, [::]:2000->2000/tcp inspiring_meitner)
