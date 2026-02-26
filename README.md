@@ -61,9 +61,12 @@ To evaluate and run code snippets dynamically, it integrates the **Piston API**,
 Somehow engineer-man banned public use of Piston API on everyone and they created a whitelist that people that are added by themselves can actually use it, at first I contacted him on his Discord but got no reason with the help of KIMI AI we were able to build our own server to run the code on docker containers, I will add the commit message `piston banned solved` and if you are interested you can use it. Everything is working fine like before.
 
 # Get Started:
+
 npm install
 
 --- Open three terminal ---
 first terminal run: `npx convex dev` (for convex)
 second terminal run: `npm run dev` (for Next.js)
-third terminal run: `sudo docker ps` (I don't know if it is working on windows you should see something like 0.0.0.0:2000->2000/tcp, [::]:2000->2000/tcp   inspiring_meitner) 
+third terminal run: `sudo docker ps` (I don't know if it is working on windows you should see something like 0.0.0.0:2000->2000/tcp, [::]:2000->2000/tcp inspiring_meitner)
+
+<p align="center"> <video src="./public/video.MP4" controls width="900"></video> </p>
