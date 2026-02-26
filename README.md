@@ -65,18 +65,8 @@ Somehow engineer-man banned public use of Piston API on everyone and they create
 npm install
 
 --- Open three terminal ---
-<<<<<<< HEAD
 first terminal run: `npx convex dev` (for convex)
 second terminal run: `npm run dev` (for Next.js)
 third terminal run: `sudo docker ps` (I don't know if it is working on windows you should see something like 0.0.0.0:2000->2000/tcp, [::]:2000->2000/tcp inspiring_meitner)
 
 <p align="center"> <video src="./public/video.MP4" controls width="900"></video> </p>
-=======
----
-First terminal run: `npx convex dev` (for convex)
----
-Second terminal run: `npm run dev` (for Next.js)
----
-Third terminal run: `sudo docker ps` (I don't know if it is working on windows you should see something like 0.0.0.0:2000->2000/tcp, [::]:2000->2000/tcp   inspiring_meitner) 
----
->>>>>>> 1962c9e61565ed1af62111a21713f10d92456e66
