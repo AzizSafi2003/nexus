@@ -22,6 +22,7 @@
 </p>
 
 ## Live Demo
+
 Explore the project live here:  
 🔗 https://codex-gold-tau.vercel.app/
 
@@ -37,22 +38,32 @@ To evaluate and run code snippets dynamically, it integrates the **Piston API**,
 ## Tech Stack
 
 ### Frontend
-- **React** — UI library  
-- **Next.js** — Full-stack React framework  
-- **TypeScript** — Static typing for robust code  
-- **TailwindCSS** — Utility-first styling  
+
+- **React** — UI library
+- **Next.js** — Full-stack React framework
+- **TypeScript** — Static typing for robust code
+- **TailwindCSS** — Utility-first styling
 
 ### Backend & Services
-- **Convex** — Backend data & functions  
-- **Clerk** — Authentication & user management  
-- **Piston API** — Remote code execution engine  
+
+- **Convex** — Backend data & functions
+- **Clerk** — Authentication & user management
+- **Piston API** — Remote code execution engine
 
 ---
 
-## Getting Started
+# In the latest code update:
 
-Clone the repository:
+<p align="center">
+  <img src="./public/The ban of Piston API.png" alt="Piston API BAN" width="900"/>
+</p>
 
-```bash
-git clone https://github.com/USERNAME/REPO_NAME.git
-cd REPO_NAME
+Somehow engineer-man banned public use of Piston API on everyone and they created a whitelist that people that are added by themselves can actually use it, at first I contacted him on his Discord but got no reason with the help of KIMI AI we were able to build our own server to run the code on docker containers, I will add the commit message `piston banned solved` and if you are interested you can use it. Everything is working fine like before.
+
+# Get Started:
+npm install
+
+--- Open three terminal ---
+first terminal run: `npx convex dev` (for convex)
+second terminal run: `npm run dev` (for Next.js)
+third terminal run: `sudo docker ps` (I don't know if it is working on windows you should see something like 0.0.0.0:2000->2000/tcp, [::]:2000->2000/tcp   inspiring_meitner) 

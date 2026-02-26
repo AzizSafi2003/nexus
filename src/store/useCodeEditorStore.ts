@@ -4,7 +4,6 @@ import { Monaco } from "@monaco-editor/react";
 import { LANGUAGE_CONFIG } from "@/app/(root)/_constants";
 
 const getInitialState = () => {
-  // if we're on the server, return default values
   if (typeof window === "undefined") {
     return {
       language: "javascript",
@@ -13,7 +12,6 @@ const getInitialState = () => {
     };
   }
 
-  // if we're on the client, return values from local storage bc localStorage is a browser API.
   const savedLanguage = localStorage.getItem("editor-language") || "javascript";
   const savedTheme = localStorage.getItem("editor-theme") || "vs-dark";
   const savedFontSize = localStorage.getItem("editor-font-size") || 16;
@@ -41,7 +39,6 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
     setEditor: (editor: Monaco) => {
       const savedCode = localStorage.getItem(`editor-code-${get().language}`);
       if (savedCode) editor.setValue(savedCode);
-
       set({ editor });
     },
 
@@ -56,14 +53,11 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
     },
 
     setLanguage: (language: string) => {
-      // Save current language code before switching
       const currentCode = get().editor?.getValue();
       if (currentCode) {
         localStorage.setItem(`editor-code-${get().language}`, currentCode);
       }
-
       localStorage.setItem("editor-language", language);
-
       set({
         language,
         output: "",
@@ -84,7 +78,8 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
 
       try {
         const runtime = LANGUAGE_CONFIG[language].pistonRuntime;
-        const response = await fetch("https://emkc.org/api/v2/piston/execute", {
+
+        const response = await fetch("/api/execute", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -92,13 +87,11 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
           body: JSON.stringify({
             language: runtime.language,
             version: runtime.version,
-            files: [{ content: code }], // the codes itself.
+            files: [{ content: code }],
           }),
         });
 
         const data = await response.json();
-
-        console.log("data back from piston:", data);
 
         // handle API-level errors
         if (data.message) {
@@ -111,10 +104,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
 
         // handle compilation errors
         if (data.compile && data.compile.code !== 0) {
-          const error =
-            data.compile.stderr ||
-            data.compile
-              .output; /* one of them will be the error standard error or general compiler error */
+          const error = data.compile.stderr || data.compile.output;
           set({
             error,
             executionResult: {
@@ -140,12 +130,10 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
           return;
         }
 
-        // if we get here, execution was successful:
+        // success:
         const output = data.run.output;
-
         set({
-          output:
-            output.trim() /* mostly output has extra newlines we remove that. */,
+          output: output.trim(),
           error: null,
           executionResult: {
             code,
@@ -154,10 +142,11 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
           },
         });
       } catch (error) {
-        console.log("Error running code:", error);
+        const errorMessage =
+          error instanceof Error ? error.message : "Unknown error";
         set({
-          error: "Error running code",
-          executionResult: { code, output: "", error: "Error running code" },
+          error: `Error: ${errorMessage}`,
+          executionResult: { code, output: "", error: errorMessage },
         });
       } finally {
         set({ isRunning: false });
@@ -166,6 +155,5 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
   };
 });
 
-// give us the newest execution results:
 export const getExecutionResult = () =>
   useCodeEditorStore.getState().executionResult;
