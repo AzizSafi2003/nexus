@@ -25,7 +25,7 @@
 
 Explore the project live here:  
 🔗 https://codex-gold-tau.vercel.app/
-
+This link used to work as it is working now I am telling this because now when we run the piston on localhost:2000 therefor the vercel won't recognize we have the way to Deploy Piston to cloud (Run Piston on Railway/Render/Hetzner VPS) which is ($5-20/month) unfortunately due to no ecomic support I can't do that for now but you can check the screen recording of running codes on various programming language at the bottom of this file 👇🏻
 ---
 
 ## Description
@@ -65,8 +65,18 @@ Somehow engineer-man banned public use of Piston API on everyone and they create
 npm install
 
 --- Open three terminal ---
+<<<<<<< HEAD
 first terminal run: `npx convex dev` (for convex)
 second terminal run: `npm run dev` (for Next.js)
 third terminal run: `sudo docker ps` (I don't know if it is working on windows you should see something like 0.0.0.0:2000->2000/tcp, [::]:2000->2000/tcp inspiring_meitner)
 
 <p align="center"> <video src="./public/video.MP4" controls width="900"></video> </p>
+=======
+---
+First terminal run: `npx convex dev` (for convex)
+---
+Second terminal run: `npm run dev` (for Next.js)
+---
+Third terminal run: `sudo docker ps` (I don't know if it is working on windows you should see something like 0.0.0.0:2000->2000/tcp, [::]:2000->2000/tcp   inspiring_meitner) 
+---
+>>>>>>> 1962c9e61565ed1af62111a21713f10d92456e66
